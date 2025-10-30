@@ -7,7 +7,7 @@ import FilterBar from '@/components/FilterBar'
 import CocktailCard from '@/components/CocktailCard'
 import CocktailDetail from '@/components/CocktailDetail'
 import Footer from '@/components/Footer'
-import Hero from '@/components/Hero';
+// import Hero from '@/components/Hero';
 
 const Index = () => {
   // Prepare cocktail data with extracted alcohol types
