@@ -195,7 +195,7 @@ def fetch_drink(url, use_selenium=True):
 
 
 # Concurrent run: fast HTTP-only pass, then small Selenium fallback for incomplete ones
-saq_links = get_saq_cocktail_links()[:10]
+saq_links = get_saq_cocktail_links()
 results = []
 errors = []
 
@@ -257,4 +257,4 @@ with open(output_file, "w", encoding="utf-8") as f:
 
 print(f"Saved {len(results)} cocktails to {output_file}")
 
-            
+### must remove duplicates like absinthe cocktails with different urls but same name

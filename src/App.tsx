@@ -1,60 +1,27 @@
-import { useMemo, useState } from 'react'
-import './App.css'
-import './app.css'
-import cocktails from './data/saq_cocktails.json'
-import type { Cocktail, CocktailWithTags } from './types'
-import { extractAlcohols } from './utils/alcohol'
-import { FilterBar } from './components/FilterBar'
-import { CocktailCard } from './components/CocktailCard'
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
 
-function App() {
-  const data = (cocktails as Cocktail[]).map(c => ({
-    ...c,
-    alcohols: extractAlcohols(c.ingredients),
-  })) as CocktailWithTags[]
+const queryClient = new QueryClient();
 
-  const [selected, setSelected] = useState<string[]>([])
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
-  const allAlcohols = useMemo(() => {
-    const set = new Set<string>()
-    data.forEach(c => c.alcohols.forEach(a => set.add(a)))
-    return Array.from(set).sort((a, b) => a.localeCompare(b, 'fr'))
-  }, [data])
-
-  const filtered = useMemo(() => {
-    if (selected.length === 0) return data
-    return data.filter(c => selected.every(a => c.alcohols.includes(a)))
-  }, [data, selected])
-
-  const toggle = (a: string) =>
-    setSelected(prev => (prev.includes(a) ? prev.filter(x => x !== a) : [...prev, a]))
-
-  return (
-    <div className="app container">
-      <header className="header">
-        <div>
-          <h1 className="title">Cocktails</h1>
-          <p className="subtitle">Filtrez par types d’alcools. Données SAQ.</p>
-        </div>
-        <div className="count">{filtered.length} / {data.length}</div>
-      </header>
-
-      <section className="panel">
-        <FilterBar
-          allAlcohols={allAlcohols}
-          selected={selected}
-          onToggle={toggle}
-          onReset={() => setSelected([])}
-        />
-      </section>
-
-      <main className="grid">
-        {filtered.map(c => (
-          <CocktailCard key={c.name} cocktail={c} />
-        ))}
-      </main>
-    </div>
-  )
-}
-
-export default App
+export default App;

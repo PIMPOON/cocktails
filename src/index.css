@@ -1,68 +1,123 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --background: 280 40% 98%;
+    --foreground: 280 50% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 280 50% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 280 50% 10%;
+
+    --primary: 270 60% 50%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 270 70% 65%;
+
+    --secondary: 20 90% 60%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 280 20% 94%;
+    --muted-foreground: 280 20% 45%;
+
+    --accent: 160 60% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 280 20% 88%;
+    --input: 280 20% 88%;
+    --ring: 270 60% 50%;
+
+    --radius: 1rem;
+    
+    --gradient-sunset: linear-gradient(135deg, hsl(270 60% 50%), hsl(20 90% 60%));
+    --gradient-tropical: linear-gradient(135deg, hsl(160 60% 50%), hsl(190 70% 50%));
+    --gradient-hero: linear-gradient(180deg, hsl(280 40% 98%), hsl(270 70% 95%));
+    
+    --shadow-soft: 0 4px 20px -2px hsl(270 60% 50% / 0.15);
+    --shadow-glow: 0 0 40px hsl(270 70% 65% / 0.3);
+    
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
-  a:hover {
-    color: #747bff;
+
+  .dark {
+    --background: 280 50% 8%;
+    --foreground: 280 20% 95%;
+
+    --card: 280 40% 12%;
+    --card-foreground: 280 20% 95%;
+
+    --popover: 280 40% 12%;
+    --popover-foreground: 280 20% 95%;
+
+    --primary: 270 70% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 270 80% 70%;
+
+    --secondary: 20 90% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 280 30% 18%;
+    --muted-foreground: 280 15% 65%;
+
+    --accent: 160 60% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 280 30% 20%;
+    --input: 280 30% 20%;
+    --ring: 270 70% 60%;
+    
+    --gradient-sunset: linear-gradient(135deg, hsl(270 70% 50%), hsl(20 85% 55%));
+    --gradient-tropical: linear-gradient(135deg, hsl(160 60% 45%), hsl(190 70% 45%));
+    --gradient-hero: linear-gradient(180deg, hsl(280 50% 8%), hsl(270 60% 15%));
+    
+    --shadow-soft: 0 4px 20px -2px hsl(270 70% 40% / 0.4);
+    --shadow-glow: 0 0 40px hsl(270 80% 50% / 0.4);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
   }
 }
