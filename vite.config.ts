@@ -28,8 +28,8 @@ import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: '/cocktails/',
+export default defineConfig(({ mode }) => ({
+  base: mode === "development" ? "/" : "/cocktails/",
   server: {
     host: "::",
     port: 8080,
@@ -50,5 +50,5 @@ export default defineConfig({
       }
     }
   }
-});
+}));
 
