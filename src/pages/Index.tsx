@@ -67,7 +67,7 @@ const Index = () => {
       // Ingredient filter: all selected ingredients must be present
       const matchesIngredients =
         selectedIngredients.length === 0 ||
-        selectedIngredients.every((ingredient) =>
+        selectedIngredients.some((ingredient) =>
           cocktail.ingredients.some((ci) =>
             ci.toLowerCase().includes(ingredient.toLowerCase())
           )
