@@ -35,20 +35,6 @@ const CocktailCard = ({ cocktail, onClick }: CocktailCardProps) => {
         <h3 className="text-xl font-bold text-foreground">{cocktail.name}</h3>
       </CardHeader>
       
-      {/* <CardContent className="pb-3">
-        <div className="flex flex-wrap gap-1.5">
-          {cocktail.ingredients.slice(0, 4).map((ingredient, index) => (
-            <Badge key={index} variant="outline" className="text-xs">
-              {ingredient}
-            </Badge>
-          ))}
-          {cocktail.ingredients.length > 4 && (
-            <Badge variant="outline" className="text-xs">
-              +{cocktail.ingredients.length - 4} more
-            </Badge>
-          )}
-        </div>
-      </CardContent> */}
     </Card>
   );
 };
