@@ -131,11 +131,23 @@ def fetch_drink(url, use_selenium=True):
             return abs_url
         return ""
 
+    def parse_glass_type(soup):
+        # Looks for .cocktail.glass-type .value
+        el = soup.select_one('.cocktail.glass-type .value')
+        if el:
+            return el.get_text(strip=True)
+        # Fallback: sometimes glass-type may not have both classes
+        el = soup.select_one('.glass-type .value')
+        if el:
+            return el.get_text(strip=True)
+        return ""
+
     name = ""
     html = ""
     ingredients = []
     preparation = []
     image = ""
+    glass_type = ""
 
     resp_url = url
     try:
@@ -148,10 +160,11 @@ def fetch_drink(url, use_selenium=True):
             preparation = parse_preparation(soup)
             name = parse_name(soup)
             image = parse_image(soup, resp_url)
+            glass_type = parse_glass_type(soup)
     except Exception:
         pass
 
-    need_selenium = use_selenium and (not name or not ingredients or not preparation or not image)
+    need_selenium = use_selenium and (not name or not ingredients or not preparation or not image or not glass_type)
     if need_selenium:
         driver = driver_setup()
         try:
@@ -164,7 +177,8 @@ def fetch_drink(url, use_selenium=True):
                 return bool(s.select(
                     '[itemprop="recipeIngredient"], .ingredients .value, .ingredients-text .value, '
                     '.cocktail__ingredients .value, .cocktail.preparation-text, .cocktail .preparation-text, '
-                    '.preparation-text, [itemprop="recipeInstructions"], meta[property="og:image"], img'
+                    '.preparation-text, [itemprop="recipeInstructions"], meta[property="og:image"], img, '
+                    '.cocktail.glass-type .value, .glass-type .value'
                 ))
 
             try:
@@ -188,10 +202,19 @@ def fetch_drink(url, use_selenium=True):
                 preparation = parse_preparation(soup)
             if not image:
                 image = parse_image(soup, driver.current_url)
+            if not glass_type:
+                glass_type = parse_glass_type(soup)
         finally:
             driver.quit()
 
-    return {"name": name, "url": url, "ingredients": ingredients, "preparation": preparation, "image": image}
+    return {
+        "name": name, 
+        "url": url, 
+        "ingredients": ingredients, 
+        "preparation": preparation, 
+        "image": image,
+        "glass_type": glass_type
+    }
 
 
 # Concurrent run: fast HTTP-only pass, then small Selenium fallback for incomplete ones
@@ -250,11 +273,29 @@ if need_fallback:
             except Exception as e:
                 errors.append({"url": u, "error": str(e)})
 
+# Remove duplicates by name (keep first occurrence)
+seen_names = set()
+unique_results = []
+for r in results:
+    name = r.get("name", "").strip().lower()
+    if name and name not in seen_names:
+        seen_names.add(name)
+        unique_results.append(r)
+results = unique_results
+
+# Assign id numbers and ensure 'id' is the first key in each dict
+for idx, r in enumerate(results, 1):
+    # Move 'id' to the first position
+    r_items = list(r.items())
+    r.clear()
+    r["id"] = idx
+    for k, v in r_items:
+        if k != "id":
+            r[k] = v
+
 # Save results to JSON file
 output_file = "saq_cocktails.json"
 with open(output_file, "w", encoding="utf-8") as f:
     json.dump(results, f, ensure_ascii=False, indent=2)
 
 print(f"Saved {len(results)} cocktails to {output_file}")
-
-### must remove duplicates like absinthe cocktails with different urls but same name

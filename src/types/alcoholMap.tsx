@@ -41,6 +41,7 @@ export interface Cocktail {
   ingredients: string[];
   preparations: string[];
   image: string;
+  glass_type: string;
 }
 
 export function extractAlcohols(ingredients: string[]): string[] {

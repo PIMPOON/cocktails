@@ -34,10 +34,10 @@ interface CocktailDetailProps {
                 <Wine className="mr-1 h-4 w-4" />
                 {cocktail.alcoholTypes.join(' / ')}
               </Badge>
-              {/* <Badge variant="outline" className="capitalize">
+              <Badge variant="outline" className="capitalize">
                 <GlassWater className="mr-1 h-4 w-4" />
-                {cocktail.glassType}
-              </Badge> */}
+                {cocktail.glass_type}
+              </Badge>
             </div>
             
             {/* <p className="text-muted-foreground">{cocktail.description}</p> */}
