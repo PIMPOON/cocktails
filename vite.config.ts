@@ -30,6 +30,10 @@ import { fileURLToPath, URL } from 'node:url'
 // https://vite.dev/config/
 export default defineConfig({
   base: '/cocktails/',
+  server: {
+    host: "::",
+    port: 8080,
+  },
   plugins: [react()],
   resolve: {
     alias: {
