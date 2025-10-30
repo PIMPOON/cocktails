@@ -24,12 +24,11 @@ const Index = () => {
     const alcohols = extractAlcohols(c.ingredients)
     return {
       ...c,
-      alcohols,
-      alcoholTypes: alcohols, 
+      alcoholTypes: alcohols,
       preparations: c.preparations || [],
       glass_type: c.glass_type || 'Unknown',
     }
-  }) as (Cocktail & { alcoholTypes: string[] })[]
+  }) as (Cocktail & { alcoholTypes: string[]; alcohols: string[] })[]
 
   // Sort cocktails alphabetically by name (French locale)
   const sortedData = useMemo(() => {
@@ -41,10 +40,14 @@ const Index = () => {
 
   const filteredCocktails = useMemo(() => {
     if (selectedAlcohols.length === 0) return sortedData
-    return sortedData.filter(c => selectedAlcohols.some(a => c.alcohols.includes(a)))
+    return sortedData.filter(c => selectedAlcohols.some(a => c.alcoholTypes.includes(a)))
   }, [sortedData, selectedAlcohols])
 
-  const setSelectedAlcohols = (alcohol: string) => {
+  const setSelectedAlcohols = (alcohol: string | null) => {
+    if (alcohol === null) {
+      setSelected([]);
+      return;
+    }
     setSelected((prev) => 
       prev.includes(alcohol) 
         ? prev.filter((i) => i !== alcohol) 

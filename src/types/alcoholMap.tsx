@@ -36,13 +36,16 @@ export const alcoholMap = {
 
 export const AlcoholTypes = Object.keys(alcoholMap);
 
-export interface Cocktail {
-  name: string;
-  ingredients: string[];
-  preparations: string[];
-  image: string;
-  glass_type: string;
-};
+export type Cocktail = {
+  id?: number
+  name: string
+  url?: string
+  ingredients: string[]
+  preparations?: string[]
+  image?: string
+  glass_type?: string
+  alcoholTypes?: string[]
+}
 
 export function extractAlcohols(ingredients: string[]): string[] {
   const found = new Set<string>();

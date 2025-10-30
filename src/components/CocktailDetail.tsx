@@ -40,8 +40,6 @@ interface CocktailDetailProps {
               </Badge>
             </div>
             
-            {/* <p className="text-muted-foreground">{cocktail.description}</p> */}
-            
             <Separator />
             
             <div>

@@ -27,7 +27,7 @@ const CocktailCard = ({ cocktail, onClick }: CocktailCardProps) => {
           className="absolute right-3 top-3 capitalize backdrop-blur-sm"
         >
           <Wine className="mr-1 h-3 w-3" />
-          {cocktail.alcoholTypes.join(' / ')}
+          {(cocktail.alcoholTypes?.join(' / ')) || 'No alcohol'}
         </Badge>
       </div>
       
