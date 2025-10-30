@@ -19,7 +19,7 @@ const CocktailCard = ({ cocktail, onClick }: CocktailCardProps) => {
         <img
           src={cocktail.image}
           alt={cocktail.name}
-          className="h-full w-full"
+          className="h-50 w-50 position-relative object-cover transition-transform duration-300 group-hover:scale-105 mx-auto"
         />
         <div className="absolute inset-0" />
         <Badge 
@@ -27,7 +27,7 @@ const CocktailCard = ({ cocktail, onClick }: CocktailCardProps) => {
           className="absolute right-3 top-3 capitalize backdrop-blur-sm"
         >
           <Wine className="mr-1 h-3 w-3" />
-          {/* {cocktail.alcoholTypes} */}
+          {cocktail.alcoholTypes.join(' / ')}
         </Badge>
       </div>
       
@@ -49,13 +49,6 @@ const CocktailCard = ({ cocktail, onClick }: CocktailCardProps) => {
           )}
         </div>
       </CardContent> */}
-      
-      <CardFooter>
-        <Button variant="ghost" className="w-full">
-          View Recipe
-        </Button>
-      </CardFooter>
-      
     </Card>
   );
 };

@@ -11,7 +11,7 @@ export const alcoholMap = {
   'Ouzo': ['ouzo', 'pastis', 'raki', 'arak'],
   'Pisco': ['pisco'],
   'Rum': [' rum', 'rum ', 'ron', 'rhum', 'overproof rum', 'spiced rum', 'dark rum', 'white rum', 'gold rum'],
-  // 'Sake': ['sake', 'nihonshu'],
+  'Sake': ['sake', 'nihonshu'],
   'Sambuca': ['sambuca'],
   'Sparkling Wine': ['champagne', 'prosecco', 'sparkling wine', 'cava', 'franciacorta', 'sekt'],
   'Tequila': ['tequila', 'blanco tequila', 'reposado tequila', 'añejo tequila'],

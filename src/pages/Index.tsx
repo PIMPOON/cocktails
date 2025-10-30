@@ -14,13 +14,20 @@ import type { Cocktail, CocktailWithTags } from '../lib//utils'
 import { extractAlcohols } from '../types/alcoholMap'
 import FilterBar from '@/components/FilterBar'
 import CocktailCard from '@/components/CocktailCard'
+import CocktailDetail from '@/components/CocktailDetail'
 import Footer from '@/components/Footer'
 
 const Index = () => {
-  const data = (cocktails as Cocktail[]).map(c => ({
-    ...c,
-    alcohols: extractAlcohols(c.ingredients),
-  })) as CocktailWithTags[]
+  // Extract alcohol types for each cocktail
+  const data = (cocktails as Cocktail[]).map(c => {
+    const alcohols = extractAlcohols(c.ingredients)
+    // "alcoholTypes" is the same as "alcohols" here, but you can adjust if needed
+    return {
+      ...c,
+      alcohols,
+      alcoholTypes: alcohols, // Add alcoholTypes property
+    }
+  }) as (CocktailWithTags & { alcoholTypes: string[] })[]
 
   // Sort cocktails alphabetically by name (French locale)
   const sortedData = useMemo(() => {
@@ -30,8 +37,7 @@ const Index = () => {
   const [selectedAlcohols, setSelected] = useState<string[]>([])
   const [selectedCocktail, setSelectedCocktail] = useState<Cocktail | null>(null)
 
-
-  const filtered = useMemo(() => {
+  const filteredCocktails = useMemo(() => {
     if (selectedAlcohols.length === 0) return sortedData
     return sortedData.filter(c => selectedAlcohols.some(a => c.alcohols.includes(a)))
   }, [sortedData, selectedAlcohols])
@@ -61,8 +67,13 @@ const Index = () => {
       />
 
       <main className="container mx-auto px-4 py-12">
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-foreground">
+            {filteredCocktails.length} {filteredCocktails.length === 1 ? 'Cocktail' : 'Cocktails'}
+          </h2>
+        </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((cocktail) => (
+          {filteredCocktails.map((cocktail) => (
             <CocktailCard 
               key={cocktail.name} 
               cocktail={cocktail}
@@ -71,6 +82,12 @@ const Index = () => {
           ))}
         </div>
       </main>
+
+      <CocktailDetail
+        cocktail={selectedCocktail}
+        open={!!selectedCocktail}
+        onClose={() => setSelectedCocktail(null)}
+      />
 
       <Footer />
       
