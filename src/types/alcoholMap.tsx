@@ -41,7 +41,7 @@ export type Cocktail = {
   name: string
   url?: string
   ingredients: string[]
-  preparations?: string[]
+  preparation?: string[]
   image?: string
   glass_type?: string
   alcoholTypes?: string[]
