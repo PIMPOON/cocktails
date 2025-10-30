@@ -42,7 +42,7 @@ export interface Cocktail {
   preparations: string[];
   image: string;
   glass_type: string;
-}
+};
 
 export function extractAlcohols(ingredients: string[]): string[] {
   const found = new Set<string>();
@@ -56,7 +56,6 @@ export function extractAlcohols(ingredients: string[]): string[] {
       }
     }
   }
-  
   return Array.from(found).sort();
 }
 

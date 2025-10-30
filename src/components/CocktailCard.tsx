@@ -1,5 +1,5 @@
 import type { Cocktail } from '../types/alcoholMap';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Card, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 // import { Button } from '@/components/ui/button';
 import { Wine } from 'lucide-react';
