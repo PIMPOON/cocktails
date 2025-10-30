@@ -10,7 +10,8 @@
 import { useMemo, useState } from 'react'
 import '../App.css'
 import cocktails from '../data/saq_cocktails.json'
-import type { Cocktail, CocktailWithTags } from '../lib//utils'
+// import type { CocktailWithTags } from '../lib//utils'
+import type { Cocktail } from '../types/alcoholMap';
 import { extractAlcohols } from '../types/alcoholMap'
 import FilterBar from '@/components/FilterBar'
 import CocktailCard from '@/components/CocktailCard'
@@ -19,15 +20,16 @@ import Footer from '@/components/Footer'
 
 const Index = () => {
   // Extract alcohol types for each cocktail
-  const data = (cocktails as Cocktail[]).map(c => {
+  const data = (cocktails as Cocktail[]).map((c: Cocktail) => {
     const alcohols = extractAlcohols(c.ingredients)
-    // "alcoholTypes" is the same as "alcohols" here, but you can adjust if needed
     return {
       ...c,
       alcohols,
-      alcoholTypes: alcohols, // Add alcoholTypes property
+      alcoholTypes: alcohols, 
+      preparations: c.preparations || [],
+      glass_type: c.glass_type || 'Unknown',
     }
-  }) as (CocktailWithTags & { alcoholTypes: string[] })[]
+  }) as (Cocktail & { alcoholTypes: string[] })[]
 
   // Sort cocktails alphabetically by name (French locale)
   const sortedData = useMemo(() => {
