@@ -29,7 +29,7 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/cocktails/',
+  base: '/',
   server: {
     host: "::",
     port: 8080,
