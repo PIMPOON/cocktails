@@ -55,19 +55,7 @@ const FilterBar = ({
   return (
     <div className="sticky top-0 z-20 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 py-6">
-        
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-foreground">Filters</h2>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClearFilters}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            Clear all
-          </Button>
-        </div>
-
+    
         <div className="space-y-4">
           <div>
             <p className="mb-2 text-sm font-medium text-muted-foreground">Alcohol Type</p>
@@ -102,14 +90,22 @@ const FilterBar = ({
 
             <div className="flex w-full justify-center mt-6">
               <div className="flex w-full max-w-md items-center gap-2 rounded-full bg-card/80 p-2 shadow-lg backdrop-blur-sm">
-              <Search className="ml-3 h-5 w-5 text-muted-foreground" />
-              <input
-                type="search"
-                value={searchQuery}
-                onChange={(e) => onSearchChange(e.target.value)}
-                placeholder="Search..."
-                className="flex-1 bg-transparent px-2 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none"
-              />
+                <Search className="ml-3 h-5 w-5 text-muted-foreground" />
+                <input
+                  type="search"
+                  value={searchQuery}
+                  onChange={(e) => onSearchChange(e.target.value)}
+                  placeholder="Search..."
+                  className="flex-1 bg-transparent px-2 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none"
+                />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onClearFilters}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Clear all
+                </Button>
               </div>
             </div>
           </div>
