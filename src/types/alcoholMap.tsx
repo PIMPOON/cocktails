@@ -19,7 +19,6 @@ export const alcoholMap = {
   'Vodka': ['vodka'],
   'Whiskey': ['whiskey', 'whisky', 'bourbon', 'scotch', 'rye', 'tennessee whiskey', 'irish whiskey', 'canadian whisky', 'japanese whisky'],
   'Wine': [' red wine', ' white wine', ' wine', 'porto', 'port ', ' sherry', 'marsala', 'madeira', 'vermouth', 'sauternes'],
-  
   // Liqueurs
   'Liqueur Anise': ['anisette', 'pastis', 'absinthe', 'ouzo', 'arak', 'sambuca'],
   'Liqueur Chocolate': ['crème de cacao', 'chocolate liqueur', 'mozart'],
