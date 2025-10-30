@@ -25,7 +25,7 @@ const Index = () => {
     return {
       ...c,
       alcoholTypes: alcohols,
-      preparations: c.preparations || [],
+      preparation: c.preparation || [],
       glass_type: c.glass_type || 'Unknown',
     }
   }) as (Cocktail & { alcoholTypes: string[]; alcohols: string[] })[]

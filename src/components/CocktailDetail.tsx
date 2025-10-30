@@ -59,7 +59,7 @@ interface CocktailDetailProps {
             <div>
               <h3 className="mb-3 text-lg font-semibold">Instructions</h3>
               <ol className="space-y-3">
-                {(cocktail.preparations ?? []).map((preparation, index) => (
+                {(cocktail.preparation ?? []).map((preparation, index) => (
                   <li key={index} className="flex gap-3 text-sm">
                     <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
                       {index + 1}
